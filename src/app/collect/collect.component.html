@@ -1,0 +1,7 @@
+<div class="collect-container">
+  <h1>Collect at</h1>
+  <div class="restaurant-collect-container" *ngFor="let restaurantCollect of restaurantCollectOptions$ | async">
+    <app-restaurant-collect style="margin-top: 5px" [restaurantCollect]="restaurantCollect"></app-restaurant-collect>
+    <mat-divider></mat-divider>
+  </div>
+</div>

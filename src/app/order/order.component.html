@@ -1,0 +1,10 @@
+<div class="order-container">
+  <h1>How do you want to order?</h1>
+  <mat-divider></mat-divider>
+  <div class="collection-row" style="margin-top: 5px">
+    <button mat-raised-button color="primary" (click)="router.navigate(['order/collection'])" >Collection</button>
+  </div>
+  <div class="delivery-row" style="margin-top: 5px;">
+    <button mat-raised-button color="primary" (click)="router.navigate(['order/delivery'])">Delivery</button>
+  </div>
+</div>

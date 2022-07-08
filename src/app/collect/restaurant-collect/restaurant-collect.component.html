@@ -1,0 +1,17 @@
+<mat-divider></mat-divider>
+<mat-card (click)="router.navigate(['order/restaurant/{{restaurantCollect?.id}}'])" class="restaurant-collect-card">
+  <mat-card-title>{{restaurantCollect?.name}} - {{restaurantCollect?.locationSummary}}</mat-card-title>
+<!--  <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+  <mat-card-content>
+    <div>
+    {{restaurantCollect?.locationDetail}}
+
+    </div>
+    <div>
+      Opening time: {{restaurantCollect?.openingHours | date:'shortTime'}}
+    </div>
+    <div>
+      Closing time: {{restaurantCollect?.closingHours | date: 'shortTime'}}
+    </div>
+  </mat-card-content>
+</mat-card>
