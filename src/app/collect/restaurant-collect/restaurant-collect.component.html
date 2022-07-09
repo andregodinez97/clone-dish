@@ -1,5 +1,5 @@
 <mat-divider></mat-divider>
-<mat-card (click)="router.navigate(['order/restaurant/{{restaurantCollect?.id}}'])" class="restaurant-collect-card">
+<mat-card (click)="loadRestaurant()" class="restaurant-collect-card">
   <mat-card-title>{{restaurantCollect?.name}} - {{restaurantCollect?.locationSummary}}</mat-card-title>
 <!--  <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
   <mat-card-content>

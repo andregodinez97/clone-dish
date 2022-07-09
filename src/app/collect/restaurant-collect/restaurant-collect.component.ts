@@ -12,9 +12,13 @@ export class RestaurantCollectComponent implements OnInit {
   @Input()
   restaurantCollect: RestaurantCollect | undefined;
 
-  constructor(public router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  loadRestaurant(): void {
+    this.router.navigate([`order/restaurant/${this.restaurantCollect?.id}`]);
   }
 
 }
