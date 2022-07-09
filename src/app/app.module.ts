@@ -12,6 +12,10 @@ import { CollectComponent } from './collect/collect.component';
 import { RestaurantCollectComponent } from './collect/restaurant-collect/restaurant-collect.component';
 import {MatCardModule} from "@angular/material/card";
 import { RestaurantComponent } from './restaurant/restaurant.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatChipsModule} from "@angular/material/chips";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { RestaurantComponent } from './restaurant/restaurant.component';
     MatButtonModule,
     ReactiveFormsModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    FontAwesomeModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

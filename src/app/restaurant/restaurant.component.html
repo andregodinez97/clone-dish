@@ -1,1 +1,60 @@
+<div class="restaurant-main-container" *ngIf="restaurantMain$ | async; let restaurantMain">
+  <div class="restaurant-main-header-container">
+    <h1>{{restaurantMain.name}}</h1>
+    <div>
+      <fa-icon size="2x" [icon]="faBagShopping"></fa-icon>
+      <span style="margin-left:5px;font-size: large; font-weight: normal">Collect at</span>
+      <span style="margin-left:5px;font-weight: lighter"> {{restaurantMain.locationDetail}}</span>
+    </div>
+    <span style="font-weight: lighter">Min order: {{restaurantMain.minimumOrder|currency:"EUR":"symbol"}}</span>
+  </div>
+
+  <div class="restaurant-main-categories-container">
+    <mat-divider style="margin-top: 5px; margin-bottom: 5px"></mat-divider>
+    <mat-chip-list aria-label="Dog selection">
+      <mat-chip *ngFor="let category of restaurantMain?.menuItemCategories">
+        {{category}}
+      </mat-chip>
+    </mat-chip-list>
+    <mat-divider style="margin-top: 5px; margin-bottom: 5px"></mat-divider>
+  </div>
+
+  <div class="restaurant-main-items-by-categories-container">
+    <div *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px" class="items-container">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h2>{{category}}</h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile *ngFor="let menuItem of getMenuItemsByCategory(category) | async">
+              <mat-card style="width: 100%; height: 100%; margin:5px; padding: 25px">
+                <mat-card-title>{{menuItem.itemName}}</mat-card-title>
+                <mat-card-subtitle>
+                  <p>{{menuItem.itemDescription}}</p>
+                  <p>{{menuItem.itemAllergens}}</p>
+                </mat-card-subtitle>
+
+                <mat-card-footer>
+                  <div style="display: flex; justify-content: space-between">
+                    <div>
+                      <span *ngIf="menuItem.itemCost"
+                            style="font-weight: bold">{{menuItem.itemCost|currency:"EUR":"symbol"}}</span>
+                    </div>
+                    <div>
+                      <fa-icon size="2x" [icon]="faAdd" style="align-self: end"></fa-icon>
+                    </div>
+                  </div>
+                </mat-card-footer>
+              </mat-card>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+</div>
 

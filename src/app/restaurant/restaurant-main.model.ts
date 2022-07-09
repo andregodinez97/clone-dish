@@ -6,23 +6,21 @@ export interface RestaurantMain {
   openingHours: Date;
   closingHours: Date;
   minimumOrder: number;
-  menuList: MenuItem[];
-
+  menuItemCategories: string[];
+  menuItemList: MenuItem[];
 }
 
-{
-  id: 9163,
-    name: 'Kawa Asian Street Food',
-  locationSummary: 'Ballinasloe',
-  locationDetail: 'Society Street, Townparks, Ballinasloe',
-  openingHours: new Date("2022-07-08T16:00:00"),
-  closingHours: new Date("2022-07-08T23:00:00")
-},
-{
-  id: 7125,
-    name: 'Kawa Asian Street Food',
-  locationSummary: 'Newcastle Road',
-  locationDetail: '32 Newcastle Road, H91 HYF5, Galway',
-  openingHours: new Date("2022-07-08T16:00:00"),
-  closingHours: new Date("2022-07-08T23:00:00")
+export interface MenuItem {
+  id: number,
+  itemName: string;
+  itemDescription: string;
+  itemAllergens: string;
+  itemCost?: number;
+  itemOptions?: ItemOption[];
+  itemCategory: string;
+}
+
+export interface ItemOption {
+  itemOptionName: string;
+  itemOptionCost: number;
 }
