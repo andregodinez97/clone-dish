@@ -11,8 +11,11 @@
 
   <div class="restaurant-main-categories-container">
     <mat-divider style="margin-top: 5px; margin-bottom: 5px"></mat-divider>
-    <mat-chip-list aria-label="Dog selection">
-      <mat-chip *ngFor="let category of restaurantMain?.menuItemCategories">
+    <mat-chip-list aria-label="Category selection">
+      <mat-chip
+        (click)="scrollToView(category)"
+        style="cursor: pointer"
+        *ngFor="let category of restaurantMain?.menuItemCategories">
         {{category}}
       </mat-chip>
     </mat-chip-list>
@@ -20,7 +23,7 @@
   </div>
 
   <div class="restaurant-main-items-by-categories-container">
-    <div *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px" class="items-container">
+    <div #itemCategory *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px" class="items-container" [id]="category">
       <mat-accordion>
         <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header>
@@ -30,13 +33,12 @@
           </mat-expansion-panel-header>
           <mat-grid-list cols="2" rowHeight="2:1">
             <mat-grid-tile *ngFor="let menuItem of getMenuItemsByCategory(category) | async">
-              <mat-card style="width: 100%; height: 100%; margin:5px; padding: 25px">
+              <mat-card style="width: 100%; height: 70%; margin:5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
                 <mat-card-title>{{menuItem.itemName}}</mat-card-title>
-                <mat-card-subtitle>
+                <mat-card-content>
                   <p>{{menuItem.itemDescription}}</p>
                   <p>{{menuItem.itemAllergens}}</p>
-                </mat-card-subtitle>
-
+                </mat-card-content>
                 <mat-card-footer>
                   <div style="display: flex; justify-content: space-between">
                     <div>
