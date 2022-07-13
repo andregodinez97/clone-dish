@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {OrderComponent} from './order/order.component';
 import {MatButtonModule} from "@angular/material/button";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDividerModule} from "@angular/material/divider";
 import { CollectComponent } from './collect/collect.component';
 import { RestaurantCollectComponent } from './collect/restaurant-collect/restaurant-collect.component';
@@ -16,6 +16,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatDialogModule} from "@angular/material/dialog";
+import { ItemOptionSelectionDialogComponent } from './restaurant/item-option-selection-dialog/item-option-selection-dialog.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     OrderComponent,
     CollectComponent,
     RestaurantCollectComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    ItemOptionSelectionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,10 @@ import {MatGridListModule} from "@angular/material/grid-list";
     FontAwesomeModule,
     MatChipsModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatRadioModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

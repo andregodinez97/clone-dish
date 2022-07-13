@@ -6,6 +6,10 @@ import {MenuItem, RestaurantMain} from "./restaurant-main.model";
 import {faAdd, faBagShopping, faMinus} from '@fortawesome/free-solid-svg-icons';
 import {BasketService} from "../basket/basket.service";
 import {BasketItem} from "../basket/basket.model";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  ItemOptionSelectionDialogComponent
+} from "./item-option-selection-dialog/item-option-selection-dialog.component";
 
 @Component({
   selector: 'app-restaurant',
@@ -26,7 +30,8 @@ export class RestaurantComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute,
               private restaurantDataService: RestaurantDataService,
-              private basketService: BasketService) {
+              private basketService: BasketService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -58,12 +63,25 @@ export class RestaurantComponent implements OnInit, AfterViewInit {
     });
   }
 
- addToBasket(menuItem: MenuItem) {
-    this.basketService.addToBasket(menuItem);
- }
+  addToBasket(menuItem: MenuItem): void {
+    if (menuItem.itemOptions && menuItem.itemOptions.length > 0) {
+      this.openItemOptionsDialog(menuItem);
+    } else {
+      this.basketService.addToBasket(menuItem);
+    }
+  }
 
- removeFromBasket(menuItem: MenuItem) {
+  removeFromBasket(menuItem: MenuItem): void {
     this.basketService.removeFromBasket(menuItem);
- }
+  }
+
+  openItemOptionsDialog(menuItem: MenuItem): void {
+    this.dialog.open(ItemOptionSelectionDialogComponent,
+      {
+        data: {
+          menuItem: menuItem
+        }
+      })
+  }
 
 }

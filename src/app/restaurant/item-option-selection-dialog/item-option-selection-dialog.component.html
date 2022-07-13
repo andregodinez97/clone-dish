@@ -1,0 +1,18 @@
+<h1 style="font-weight: bold">
+  {{data.menuItem.itemName}}
+</h1>
+<p>
+  {{data.menuItem.itemDescription}}
+</p>
+<label id="item-option-radio-group-label"><h2>Options - Choose one</h2></label>
+<mat-radio-group
+  aria-labelledby="item-option-radio-group-label"
+  class="item-option-radio-group"
+>
+  <mat-radio-button
+    class="item-option-radio-button" *ngFor="let itemOption of data.menuItem.itemOptions"
+    [value]="itemOption.isSelected">
+    {{itemOption.itemOptionName}}
+  </mat-radio-button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-radio-group>
