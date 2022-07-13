@@ -42,7 +42,7 @@ export const restaurantsDataMock: RestaurantMain[] = [
         itemCost: 7,
         itemCategory: "Asian Bites"
       }, {
-        id: 9125,
+        id: 9126,
         itemName: "Pad Thai",
         itemDescription: "Flat Rice Noodles with Chicken, Prawns, fresh Vegetables, served with Crushed Peanuts on side & a wedge of fresh juice Lemon.",
         itemAllergens: "Contains Crustaceans, Eggs, Gluten, Molluscs, Fish, Mustard, Soybeans & Peanuts.",
@@ -58,7 +58,7 @@ export const restaurantsDataMock: RestaurantMain[] = [
         ],
         itemCategory: "Noodles"
       }, {
-        id: 9125,
+        id: 9127,
         itemName: "Yakisoba Noodles",
         itemDescription: "Udon Noodles with Chicken, Prawns & fresh Vegetables served with a sprinkle of toasted Sesame Seeds.",
         itemAllergens: "Contains Eggs, Gluten, Molluscs & Soybeans.",

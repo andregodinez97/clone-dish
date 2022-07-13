@@ -3,7 +3,9 @@ import {ActivatedRoute} from "@angular/router";
 import {filter, map, Observable} from "rxjs";
 import {RestaurantDataService} from "./restaurant-data.service";
 import {MenuItem, RestaurantMain} from "./restaurant-main.model";
-import {faAdd, faBagShopping} from '@fortawesome/free-solid-svg-icons';
+import {faAdd, faBagShopping, faMinus} from '@fortawesome/free-solid-svg-icons';
+import {BasketService} from "../basket/basket.service";
+import {BasketItem} from "../basket/basket.model";
 
 @Component({
   selector: 'app-restaurant',
@@ -13,12 +15,18 @@ import {faAdd, faBagShopping} from '@fortawesome/free-solid-svg-icons';
 export class RestaurantComponent implements OnInit, AfterViewInit {
   faBagShopping = faBagShopping;
   faAdd = faAdd;
+  faMinus = faMinus;
+
 
   @ViewChildren('itemCategory') itemCategories!: QueryList<ElementRef>;
 
   public restaurantMain$: Observable<RestaurantMain | undefined> | undefined;
+  public basketItems$: Observable<BasketItem[]> | undefined;
 
-  constructor(private route: ActivatedRoute, private restaurantDataService: RestaurantDataService) {
+
+  constructor(private route: ActivatedRoute,
+              private restaurantDataService: RestaurantDataService,
+              private basketService: BasketService) {
   }
 
   ngOnInit(): void {
@@ -27,6 +35,7 @@ export class RestaurantComponent implements OnInit, AfterViewInit {
     });
 
     this.restaurantMain$ = this.restaurantDataService.restaurantData$;
+    this.basketItems$ = this.basketService.basketItems$;
   }
 
   ngAfterViewInit(): void {
@@ -49,5 +58,12 @@ export class RestaurantComponent implements OnInit, AfterViewInit {
     });
   }
 
+ addToBasket(menuItem: MenuItem) {
+    this.basketService.addToBasket(menuItem);
+ }
+
+ removeFromBasket(menuItem: MenuItem) {
+    this.basketService.removeFromBasket(menuItem);
+ }
 
 }

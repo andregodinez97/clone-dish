@@ -18,9 +18,11 @@ export interface MenuItem {
   itemCost?: number;
   itemOptions?: ItemOption[];
   itemCategory: string;
+  itemCount?: number;
 }
 
 export interface ItemOption {
   itemOptionName: string;
   itemOptionCost: number;
+  isSelected?: boolean;
 }

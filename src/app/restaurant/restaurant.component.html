@@ -1,4 +1,17 @@
 <div class="restaurant-main-container" *ngIf="restaurantMain$ | async; let restaurantMain">
+  <div>Basket log</div>
+  <div *ngFor="let basketItem of basketItems$ | async">
+    <div>
+      {{ basketItem.itemName }}
+    </div>
+    <div>
+      {{ basketItem.itemCount }}
+    </div>
+    <div>
+      {{ basketItem.itemOption }}
+    </div>
+  </div>
+
   <div class="restaurant-main-header-container">
     <h1>{{restaurantMain.name}}</h1>
     <div>
@@ -23,7 +36,8 @@
   </div>
 
   <div class="restaurant-main-items-by-categories-container">
-    <div #itemCategory *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px" class="items-container" [id]="category">
+    <div #itemCategory *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px"
+         class="items-container" [id]="category">
       <mat-accordion>
         <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header>
@@ -33,7 +47,8 @@
           </mat-expansion-panel-header>
           <mat-grid-list cols="2" rowHeight="2:1">
             <mat-grid-tile *ngFor="let menuItem of getMenuItemsByCategory(category) | async">
-              <mat-card style="width: 100%; height: 70%; margin:5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
+              <mat-card
+                style="width: 100%; height: 70%; margin:5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
                 <mat-card-title>{{menuItem.itemName}}</mat-card-title>
                 <mat-card-content>
                   <p>{{menuItem.itemDescription}}</p>
@@ -46,7 +61,14 @@
                             style="font-weight: bold">{{menuItem.itemCost|currency:"EUR":"symbol"}}</span>
                     </div>
                     <div>
-                      <fa-icon size="2x" [icon]="faAdd" style="align-self: end"></fa-icon>
+                      <fa-icon *ngIf="menuItem.itemCount" size="2x"
+                               (click)="removeFromBasket(menuItem)"
+                               [icon]="faMinus"
+                               style="align-self: end"></fa-icon>
+                      <span *ngIf="menuItem.itemCount"
+                            style="margin-left: 5px; margin-right: 5px">{{menuItem.itemCount}}</span>
+                      <fa-icon size="2x" [icon]="faAdd" style="align-self: end"
+                               (click)="addToBasket(menuItem)"></fa-icon>
                     </div>
                   </div>
                 </mat-card-footer>
