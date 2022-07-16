@@ -78,6 +78,9 @@ export class RestaurantComponent implements OnInit, AfterViewInit {
   openItemOptionsDialog(menuItem: MenuItem): void {
     this.dialog.open(ItemOptionSelectionDialogComponent,
       {
+        hasBackdrop: true,
+        width: '500px',
+        height: '600px',
         data: {
           menuItem: menuItem
         }

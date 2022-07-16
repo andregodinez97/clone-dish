@@ -48,10 +48,13 @@ export const restaurantsDataMock: RestaurantMain[] = [
         itemAllergens: "Contains Crustaceans, Eggs, Gluten, Molluscs, Fish, Mustard, Soybeans & Peanuts.",
         itemOptions: [
           {
+            itemOptionId: 9223,
             itemOptionName: "Vegetarian",
             itemOptionCost: 9,
+            isSelected: true
           },
           {
+            itemOptionId: 9224,
             itemOptionName: "Non Vegetarian",
             itemOptionCost: 11,
           }
@@ -64,10 +67,12 @@ export const restaurantsDataMock: RestaurantMain[] = [
         itemAllergens: "Contains Eggs, Gluten, Molluscs & Soybeans.",
         itemOptions: [
           {
+            itemOptionId: 9225,
             itemOptionName: "Vegetarian",
             itemOptionCost: 9,
           },
           {
+            itemOptionId: 9226,
             itemOptionName: "Non Vegetarian",
             itemOptionCost: 11,
           }

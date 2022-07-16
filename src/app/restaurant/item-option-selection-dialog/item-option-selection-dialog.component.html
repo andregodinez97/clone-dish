@@ -1,18 +1,78 @@
-<h1 style="font-weight: bold">
-  {{data.menuItem.itemName}}
-</h1>
-<p>
-  {{data.menuItem.itemDescription}}
-</p>
-<label id="item-option-radio-group-label"><h2>Options - Choose one</h2></label>
-<mat-radio-group
-  aria-labelledby="item-option-radio-group-label"
-  class="item-option-radio-group"
->
-  <mat-radio-button
-    class="item-option-radio-button" *ngFor="let itemOption of data.menuItem.itemOptions"
-    [value]="itemOption.isSelected">
-    {{itemOption.itemOptionName}}
-  </mat-radio-button>
-  <button mat-button mat-dialog-close>Cancel</button>
-</mat-radio-group>
+<div class="item-option-selection-container"
+     style="display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     height: 100%;
+">
+  <div *ngIf="!showSummaryView" class="item-option-description-selection-container">
+    <h1 style="font-weight: bold">
+      {{data.menuItem.itemName}}
+    </h1>
+    <p>
+      {{data.menuItem.itemDescription}}
+    </p>
+    <p>
+      {{data.menuItem.itemAllergens}}
+    </p>
+    <label id="item-option-radio-group-label"><h2>Options - Choose one</h2></label>
+    <mat-radio-group
+      aria-labelledby="item-option-radio-group-label"
+      class="item-option-radio-group"
+      [value]="getSelectedItemOption()"
+      (change)="onSelectedItemChange($event.value)"
+    >
+      <mat-radio-button
+        class="item-option-radio-button"
+        *ngFor="let itemOption of data.menuItem.itemOptions"
+        [value]="itemOption">
+        {{itemOption.itemOptionName}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div *ngIf="showSummaryView">
+    <div class="summary-view-header-container" style="display: flex; justify-content: space-between">
+      <fa-icon style="cursor: pointer"
+               (click)="resetToItemSelection()"
+               [icon]="faArrowLeft"></fa-icon>
+      <h1 style="font-weight: bold">
+        {{data.menuItem.itemName}}
+      </h1>
+      <div></div>
+    </div>
+    <h2>Summary</h2>
+    <div>
+      <p>
+        {{data.menuItem.itemName}}
+      </p>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-between">
+      <p>
+        {{getSelectedItemOption()?.itemOptionName}}
+      </p>
+      <p>
+        {{getSelectedItemOption()?.itemOptionCost | currency:"EUR":"symbol"}}
+      </p>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: space-between">
+    <button *ngIf="!showSummaryView" (click)="onCancel()" mat-button mat-dialog-close>Cancel</button>
+
+    <div *ngIf="showSummaryView" style="display: flex">
+      <fa-icon size="2x" [icon]="faMinus" (click)="removeSelectedItemOptionFromBasket()"></fa-icon>
+      <!--      <span *ngIf="menuItem.itemCount"-->
+      <!--            style="margin-left: 5px; margin-right: 5px">{{menuItem.itemCount}}</span>-->
+      <fa-icon size="2x" [icon]="faAdd" (click)="addSelectedItemOptionToBasket()"></fa-icon>
+    </div>
+
+    <button *ngIf="showSummaryView" (click)="addItemOptionToBasket()" color="primary" mat-button mat-dialog-close>
+      <div style="display: flex; justify-content: space-between">
+        <span>Add To Basket</span>
+        <span style="margin-left: 100px">{{getSelectedItemOption()?.itemOptionCost | currency:"EUR":"symbol"}}</span>
+      </div>
+    </button>
+
+  </div>
+</div>
+
+
+

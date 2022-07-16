@@ -22,6 +22,7 @@ export interface MenuItem {
 }
 
 export interface ItemOption {
+  itemOptionId: number;
   itemOptionName: string;
   itemOptionCost: number;
   isSelected?: boolean;
