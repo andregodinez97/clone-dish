@@ -19,6 +19,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ItemOptionSelectionDialogComponent } from './restaurant/item-option-selection-dialog/item-option-selection-dialog.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { ItemsByCategoryComponent } from './restaurant/items-by-category/items-by-category.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatRadioModule} from "@angular/material/radio";
     CollectComponent,
     RestaurantCollectComponent,
     RestaurantComponent,
-    ItemOptionSelectionDialogComponent
+    ItemOptionSelectionDialogComponent,
+    ItemsByCategoryComponent
   ],
   imports: [
     BrowserModule,

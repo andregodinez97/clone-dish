@@ -14,47 +14,47 @@ export class BasketService {
   constructor() {
   }
 
-  addToBasket(menuItem: MenuItem): void {
-    menuItem.itemCount = menuItem.itemCount ? ++menuItem.itemCount : 1;
+  getBasketItem(itemId: number): BasketItem | undefined {
+    return this.basketItemsSubject.getValue().find(basketItem => basketItem.itemId === itemId || undefined);
+  }
 
-    const existingBasketItem = this.basketItemsSubject.getValue().find(basketItem => basketItem.itemId === menuItem.id);
+  addToExistingBasketItem(itemId: number): void {
+    const existingBasketItem = this.getBasketItem(itemId)!;
+    existingBasketItem.itemCount++;
+    this.basketItemsSubject.next(this.basketItemsSubject.getValue());
+  }
+
+  addMenuItemToBasket(menuItem: MenuItem): void {
+    const newBasketItem = {
+      itemId: menuItem.id,
+      itemName: menuItem.itemName,
+      itemCount: 1,
+    } as BasketItem;
+
+    if (menuItem.itemOptions && menuItem.itemOptions.length > 0) {
+      newBasketItem.itemOption = menuItem.itemOptions.find(itemOption => itemOption.isSelected);
+    }
+
+    this.basketItemsSubject.next([...this.basketItemsSubject.getValue(), newBasketItem]);
+  }
+
+  removeFromBasket(itemId: number): void {
+    const existingBasketItem = this.getBasketItem(itemId);
+
     if (existingBasketItem) {
-      existingBasketItem.itemCount++;
-      this.basketItemsSubject.next(this.basketItemsSubject.getValue());
-    } else {
+      if (existingBasketItem.itemCount - 1 === 0) {
+        const basketItemIndex = this.basketItemsSubject.getValue().indexOf(existingBasketItem)
 
-      const newBasketItem = {
-        itemId: menuItem.id,
-        itemName: menuItem.itemName,
-        itemCount: 1,
-      } as BasketItem;
+        if (basketItemIndex !== -1) {
+          this.basketItemsSubject.getValue().splice(basketItemIndex, 1);
+          this.basketItemsSubject.next(this.basketItemsSubject.getValue());
+        }
 
-      if (menuItem.itemOptions && menuItem.itemOptions.length > 0) {
-        newBasketItem.itemOption = menuItem.itemOptions.find(itemOption => itemOption.isSelected);
-      }
-      this.basketItemsSubject.next([...this.basketItemsSubject.getValue(), newBasketItem]);
-    }
-  }
-
-  removeFromBasket(menuItem: MenuItem): void {
-    const existingBasketItem = this.basketItemsSubject.getValue().find(basketItem => basketItem.itemId === menuItem.id)!;
-
-    if (existingBasketItem.itemCount - 1 === 0) {
-      const basketItemIndex = this.basketItemsSubject.getValue().indexOf(existingBasketItem)
-
-      if (basketItemIndex !== -1) {
-        this.basketItemsSubject.getValue().splice(basketItemIndex, 1);
+      } else {
+        existingBasketItem.itemCount--;
         this.basketItemsSubject.next(this.basketItemsSubject.getValue());
-        menuItem.itemCount = 0;
       }
-
-    } else {
-      existingBasketItem.itemCount--;
-      menuItem.itemCount!--;
-      this.basketItemsSubject.next(this.basketItemsSubject.getValue());
     }
 
   }
-
-
 }

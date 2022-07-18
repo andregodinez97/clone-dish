@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {itemOptionSelectionDialogData} from "./item-option-selection-dialog.model";
 import {ItemOption} from "../restaurant-main.model";
 import {faArrowLeft, faMinus, faAdd} from "@fortawesome/free-solid-svg-icons";
+import {BasketService} from "../../basket/basket.service";
+import {BasketItem} from "../../basket/basket.model";
 
 @Component({
   selector: 'app-item-option-selection-dialog',
@@ -16,13 +18,19 @@ export class ItemOptionSelectionDialogComponent implements OnInit {
   faMinus = faMinus;
   faAdd = faAdd;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: itemOptionSelectionDialogData) {
+  constructor(@Inject(MAT_DIALOG_DATA)
+              public data: itemOptionSelectionDialogData,
+              private basketService: BasketService) {
   }
 
   ngOnInit(): void {
     this.initialItemOptions =
       JSON.parse(JSON.stringify(this.data.menuItem.itemOptions));
     this.showSummaryView = !!this.getSelectedItemOption();
+  }
+
+  getBasketItem(itemId: number): BasketItem | undefined {
+    return this.basketService.getBasketItem(itemId);
   }
 
   getSelectedItemOption(): ItemOption | undefined {

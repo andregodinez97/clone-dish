@@ -1,0 +1,52 @@
+<div class="items-by-category-container" [id]="category">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>{{category}}</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile *ngFor="let menuItem of getMenuItemsByCategory(category!) | async">
+          <mat-card
+            style="width: 100%; height: 70%; margin: 5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
+            <mat-card-title>{{menuItem.itemName}}</mat-card-title>
+            <mat-card-content>
+              <p>{{menuItem.itemDescription}}</p>
+              <p>{{menuItem.itemAllergens}}</p>
+            </mat-card-content>
+            <mat-card-footer>
+              <div style="display: flex; justify-content: space-between">
+                <div>
+                <span *ngIf="menuItem.itemCost"
+                      style="font-weight: bold">{{menuItem.itemCost|currency:"EUR":"symbol"}}</span>
+                </div>
+                <div>
+                  <fa-icon
+                    *ngIf="!!getBasketItem(menuItem.id) && getBasketItem(menuItem.id)?.itemCount !== 0"
+                    (click)="removeFromBasket(menuItem.id)"
+                    [icon]="faMinus"
+                    size="2x"
+                    style="align-self: end; cursor: pointer"
+                  ></fa-icon>
+                  <span
+                    *ngIf="!!getBasketItem(menuItem.id) && getBasketItem(menuItem.id)?.itemCount !== 0"
+                    style="margin-left: 5px; margin-right: 5px">
+                  {{getBasketItem(menuItem.id)?.itemCount}}
+                </span>
+                  <fa-icon
+                    size="2x"
+                    style="align-self: end;cursor: pointer"
+                    [icon]="faAdd"
+                    (click)="addToBasket(menuItem)"
+                  ></fa-icon>
+                </div>
+              </div>
+            </mat-card-footer>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+

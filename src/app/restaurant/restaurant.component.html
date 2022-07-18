@@ -36,49 +36,12 @@
   </div>
 
   <div class="restaurant-main-items-by-categories-container">
-    <div #itemCategory *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px"
-         class="items-container" [id]="category">
-      <mat-accordion>
-        <mat-expansion-panel [expanded]="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h2>{{category}}</h2>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-grid-list cols="2" rowHeight="2:1">
-            <mat-grid-tile *ngFor="let menuItem of getMenuItemsByCategory(category) | async">
-              <mat-card
-                style="width: 100%; height: 70%; margin:5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
-                <mat-card-title>{{menuItem.itemName}}</mat-card-title>
-                <mat-card-content>
-                  <p>{{menuItem.itemDescription}}</p>
-                  <p>{{menuItem.itemAllergens}}</p>
-                </mat-card-content>
-                <mat-card-footer>
-                  <div style="display: flex; justify-content: space-between">
-                    <div>
-                      <span *ngIf="menuItem.itemCost"
-                            style="font-weight: bold">{{menuItem.itemCost|currency:"EUR":"symbol"}}</span>
-                    </div>
-                    <div>
-                      <fa-icon *ngIf="menuItem.itemCount" size="2x"
-                               (click)="removeFromBasket(menuItem)"
-                               [icon]="faMinus"
-                               style="align-self: end"></fa-icon>
-                      <span *ngIf="menuItem.itemCount"
-                            style="margin-left: 5px; margin-right: 5px">{{menuItem.itemCount}}</span>
-                      <fa-icon size="2x" [icon]="faAdd" style="align-self: end"
-                               (click)="addToBasket(menuItem)"></fa-icon>
-                    </div>
-                  </div>
-                </mat-card-footer>
-              </mat-card>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <div *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px"
+         class="items-container">
+      <app-items-by-category
+        [category] = "category"
+      ></app-items-by-category>
     </div>
-  </div>
 
 </div>
 

@@ -59,8 +59,9 @@
 
     <div *ngIf="showSummaryView" style="display: flex">
       <fa-icon size="2x" [icon]="faMinus" (click)="removeSelectedItemOptionFromBasket()"></fa-icon>
-      <!--      <span *ngIf="menuItem.itemCount"-->
-      <!--            style="margin-left: 5px; margin-right: 5px">{{menuItem.itemCount}}</span>-->
+      <span
+        *ngIf="!!getBasketItem(data.menuItem.id) && getBasketItem(data.menuItem.id)?.itemCount !== 0"
+        style="margin-left: 5px; margin-right: 5px">{{getBasketItem(data.menuItem.id)?.itemCount}}</span>
       <fa-icon size="2x" [icon]="faAdd" (click)="addSelectedItemOptionToBasket()"></fa-icon>
     </div>
 
