@@ -13,7 +13,11 @@ import {BasketItem} from "../../basket/basket.model";
 })
 export class ItemOptionSelectionDialogComponent implements OnInit {
   showSummaryView: boolean = false;
+  summaryViewEnabled: boolean = false;
   initialItemOptions: ItemOption[] | undefined;
+
+  newBasketItemCount = 1;
+
   faArrowLeft = faArrowLeft;
   faMinus = faMinus;
   faAdd = faAdd;
@@ -24,6 +28,7 @@ export class ItemOptionSelectionDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.summaryViewEnabled = !!this.data.menuItem.itemOptions && this.data.menuItem.itemOptions.length > 0;
     this.initialItemOptions =
       JSON.parse(JSON.stringify(this.data.menuItem.itemOptions));
     this.showSummaryView = !!this.getSelectedItemOption();

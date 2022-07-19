@@ -29,7 +29,7 @@
       </mat-radio-button>
     </mat-radio-group>
   </div>
-  <div *ngIf="showSummaryView">
+  <div *ngIf="summaryViewEnabled && showSummaryView">
     <div class="summary-view-header-container" style="display: flex; justify-content: space-between">
       <fa-icon style="cursor: pointer"
                (click)="resetToItemSelection()"
@@ -57,12 +57,20 @@
   <div style="display: flex; justify-content: space-between">
     <button *ngIf="!showSummaryView" (click)="onCancel()" mat-button mat-dialog-close>Cancel</button>
 
-    <div *ngIf="showSummaryView" style="display: flex">
-      <fa-icon size="2x" [icon]="faMinus" (click)="removeSelectedItemOptionFromBasket()"></fa-icon>
-      <span
-        *ngIf="!!getBasketItem(data.menuItem.id) && getBasketItem(data.menuItem.id)?.itemCount !== 0"
-        style="margin-left: 5px; margin-right: 5px">{{getBasketItem(data.menuItem.id)?.itemCount}}</span>
-      <fa-icon size="2x" [icon]="faAdd" (click)="addSelectedItemOptionToBasket()"></fa-icon>
+    <div *ngIf="showSummaryView">
+      <div *ngIf="!!getBasketItem(data.menuItem.id) && getBasketItem(data.menuItem.id)?.itemCount !== 0; else basketItemCountTemplate" style="display: flex">
+        <fa-icon size="2x" [icon]="faMinus" (click)="removeSelectedItemOptionFromBasket()"></fa-icon>
+        <span style="margin-left: 5px; margin-right: 5px">{{getBasketItem(data.menuItem.id)?.itemCount}}</span>
+        <fa-icon size="2x" [icon]="faAdd" (click)="addSelectedItemOptionToBasket()"></fa-icon>
+      </div>
+      <ng-template #basketItemCountTemplate>
+        <fa-icon size="2x"
+                 [ngClass]="[newBasketItemCount === 1 ? 'fa-disabled' : 'fa-pointer']"
+                 [icon]="faMinus"
+                 (click)="newBasketItemCount !== 1 ? newBasketItemCount = newBasketItemCount - 1 : 1"></fa-icon>
+        <span style="margin-left: 5px; margin-right: 5px">{{newBasketItemCount}}</span>
+        <fa-icon style="cursor: pointer" size="2x" [icon]="faAdd" (click)="newBasketItemCount = newBasketItemCount + 1 "></fa-icon>
+      </ng-template>
     </div>
 
     <button *ngIf="showSummaryView" (click)="addItemOptionToBasket()" color="primary" mat-button mat-dialog-close>

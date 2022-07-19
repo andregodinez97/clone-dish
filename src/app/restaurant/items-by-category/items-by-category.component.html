@@ -9,7 +9,8 @@
       <mat-grid-list cols="2" rowHeight="2:1">
         <mat-grid-tile *ngFor="let menuItem of getMenuItemsByCategory(category!) | async">
           <mat-card
-            style="width: 100%; height: 70%; margin: 5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
+            (click)="openItemOptionsDialog(menuItem)"
+            style="cursor: pointer; width: 100%; height: 70%; margin: 5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
             <mat-card-title>{{menuItem.itemName}}</mat-card-title>
             <mat-card-content>
               <p>{{menuItem.itemDescription}}</p>
@@ -21,7 +22,7 @@
                 <span *ngIf="menuItem.itemCost"
                       style="font-weight: bold">{{menuItem.itemCost|currency:"EUR":"symbol"}}</span>
                 </div>
-                <div>
+                <div class="add-remove-basket-container" style="z-index: 3">
                   <fa-icon
                     *ngIf="!!getBasketItem(menuItem.id) && getBasketItem(menuItem.id)?.itemCount !== 0"
                     (click)="removeFromBasket(menuItem.id)"

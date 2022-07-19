@@ -51,7 +51,6 @@ export const restaurantsDataMock: RestaurantMain[] = [
             itemOptionId: 9223,
             itemOptionName: "Vegetarian",
             itemOptionCost: 9,
-            isSelected: true
           },
           {
             itemOptionId: 9224,
