@@ -4,42 +4,55 @@
      justify-content: space-between;
      height: 100%;
 ">
+  <!--  Menu details -->
   <div *ngIf="!showSummaryView" class="item-option-description-selection-container">
-    <h1 style="font-weight: bold">
-      {{data.menuItem.itemName}}
-    </h1>
+    <div style="display: flex; justify-content: space-between">
+      <h1 style="font-weight: bold">{{data.menuItem.itemName}}</h1>
+      <fa-icon mat-dialog-close
+               class="fa-pointer"
+               [icon]="faX"
+               (click)="onCancel()"></fa-icon>
+    </div>
     <p>
       {{data.menuItem.itemDescription}}
     </p>
     <p>
       {{data.menuItem.itemAllergens}}
     </p>
-    <label id="item-option-radio-group-label"><h2>Options - Choose one</h2></label>
-    <mat-radio-group
-      aria-labelledby="item-option-radio-group-label"
-      class="item-option-radio-group"
-      [value]="getSelectedItemOption()"
-      (change)="onSelectedItemChange($event.value)"
-    >
-      <mat-radio-button
-        class="item-option-radio-button"
-        *ngFor="let itemOption of data.menuItem.itemOptions"
-        [value]="itemOption">
-        {{itemOption.itemOptionName}}
-      </mat-radio-button>
-    </mat-radio-group>
+    <!--    Choose option -->
+    <section *ngIf="itemOptionsAvailable" class="choose-option-section">
+      <label id="item-option-radio-group-label"><h2>Options - Choose one</h2></label>
+      <mat-radio-group
+        aria-labelledby="item-option-radio-group-label"
+        class="item-option-radio-group"
+        [value]="getSelectedItemOption()"
+        (change)="onSelectedItemChange($event.value)"
+      >
+        <mat-radio-button
+          class="item-option-radio-button"
+          *ngFor="let itemOption of data.menuItem.itemOptions"
+          [value]="itemOption">
+          {{itemOption.itemOptionName}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </section>
   </div>
-  <div *ngIf="summaryViewEnabled && showSummaryView">
+  <!--  Summary page-->
+  <div *ngIf="showSummaryView">
+    <!--    summary header -->
     <div class="summary-view-header-container" style="display: flex; justify-content: space-between">
+      <!--      back button-->
       <fa-icon style="cursor: pointer"
                (click)="resetToItemSelection()"
                [icon]="faArrowLeft"></fa-icon>
+      <!--      summary header title-->
       <h1 style="font-weight: bold">
         {{data.menuItem.itemName}}
       </h1>
       <div></div>
     </div>
     <h2>Summary</h2>
+    <!--    summary details -->
     <div>
       <p>
         {{data.menuItem.itemName}}
@@ -54,32 +67,25 @@
       </p>
     </div>
   </div>
-  <div style="display: flex; justify-content: space-between">
-    <button *ngIf="!showSummaryView" (click)="onCancel()" mat-button mat-dialog-close>Cancel</button>
-
-    <div *ngIf="showSummaryView">
-      <div *ngIf="!!getBasketItem(data.menuItem.id) && getBasketItem(data.menuItem.id)?.itemCount !== 0; else basketItemCountTemplate" style="display: flex">
-        <fa-icon size="2x" [icon]="faMinus" (click)="removeSelectedItemOptionFromBasket()"></fa-icon>
-        <span style="margin-left: 5px; margin-right: 5px">{{getBasketItem(data.menuItem.id)?.itemCount}}</span>
-        <fa-icon size="2x" [icon]="faAdd" (click)="addSelectedItemOptionToBasket()"></fa-icon>
-      </div>
-      <ng-template #basketItemCountTemplate>
-        <fa-icon size="2x"
-                 [ngClass]="[newBasketItemCount === 1 ? 'fa-disabled' : 'fa-pointer']"
-                 [icon]="faMinus"
-                 (click)="newBasketItemCount !== 1 ? newBasketItemCount = newBasketItemCount - 1 : 1"></fa-icon>
-        <span style="margin-left: 5px; margin-right: 5px">{{newBasketItemCount}}</span>
-        <fa-icon style="cursor: pointer" size="2x" [icon]="faAdd" (click)="newBasketItemCount = newBasketItemCount + 1 "></fa-icon>
-      </ng-template>
+  <!--  summary footer -->
+  <div *ngIf="showSummaryView || !itemOptionsAvailable" style="display: flex; justify-content: space-between">
+    <!--    increase reduce basket-->
+    <div>
+      <fa-icon size="2x"
+               [ngClass]="[newBasketItemCount === 1 ? 'fa-disabled' : 'fa-pointer']"
+               [icon]="faMinus"
+               (click)="newBasketItemCount !== 1 ? newBasketItemCount = newBasketItemCount - 1 : 1"></fa-icon>
+      <span style="margin-left: 5px; margin-right: 5px">{{newBasketItemCount}}</span>
+      <fa-icon style="cursor: pointer" size="2x" [icon]="faAdd"
+               (click)="newBasketItemCount = newBasketItemCount + 1 "></fa-icon>
     </div>
-
-    <button *ngIf="showSummaryView" (click)="addItemOptionToBasket()" color="primary" mat-button mat-dialog-close>
+<!--    add to basket -->
+    <button (click)="addItemToBasket()" color="primary" mat-button mat-dialog-close>
       <div style="display: flex; justify-content: space-between">
         <span>Add To Basket</span>
         <span style="margin-left: 100px">{{getSelectedItemOption()?.itemOptionCost | currency:"EUR":"symbol"}}</span>
       </div>
     </button>
-
   </div>
 </div>
 

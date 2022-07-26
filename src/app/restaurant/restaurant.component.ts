@@ -4,7 +4,7 @@ import {map, Observable} from "rxjs";
 import {RestaurantDataService} from "./restaurant-data.service";
 import {RestaurantMain} from "./restaurant-main.model";
 import {faBagShopping} from '@fortawesome/free-solid-svg-icons';
-import {BasketService} from "../basket/basket.service";
+import {BasketService} from "../basket/basket-service/basket.service";
 import {BasketItem} from "../basket/basket.model";
 import {ItemsByCategoryComponent} from "./items-by-category/items-by-category.component";
 

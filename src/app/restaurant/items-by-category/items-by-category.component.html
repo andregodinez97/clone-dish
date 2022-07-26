@@ -9,10 +9,10 @@
       <mat-grid-list cols="2" rowHeight="2:1">
         <mat-grid-tile *ngFor="let menuItem of getMenuItemsByCategory(category!) | async">
           <mat-card
-            (click)="openItemOptionsDialog(menuItem)"
+            (click)="openItemOptionsDialog(menuItem, $event)"
             style="cursor: pointer; width: 100%; height: 70%; margin: 5px; padding: 25px; display:flex; flex-direction: column;justify-content: space-between">
             <mat-card-title>{{menuItem.itemName}}</mat-card-title>
-            <mat-card-content>
+            <mat-card-content class="item-description-container">
               <p>{{menuItem.itemDescription}}</p>
               <p>{{menuItem.itemAllergens}}</p>
             </mat-card-content>

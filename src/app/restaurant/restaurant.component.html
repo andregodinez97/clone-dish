@@ -1,17 +1,4 @@
 <div class="restaurant-main-container" *ngIf="restaurantMain$ | async; let restaurantMain">
-  <div>Basket log</div>
-  <div *ngFor="let basketItem of basketItems$ | async">
-    <div>
-      {{ basketItem.itemName }}
-    </div>
-    <div>
-      {{ basketItem.itemCount }}
-    </div>
-    <div>
-      {{ basketItem.itemOption }}
-    </div>
-  </div>
-
   <div class="restaurant-main-header-container">
     <h1>{{restaurantMain.name}}</h1>
     <div>
@@ -39,9 +26,8 @@
     <div *ngFor="let category of restaurantMain?.menuItemCategories" style="margin-top: 10px"
          class="items-container">
       <app-items-by-category
-        [category] = "category"
+        [category]="category"
       ></app-items-by-category>
     </div>
-
+  </div>
 </div>
-

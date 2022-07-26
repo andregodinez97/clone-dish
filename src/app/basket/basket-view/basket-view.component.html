@@ -1,0 +1,19 @@
+<div *ngIf="!!basketItems$ && (basketItems$ | async)!.length > 0; let basketItems" class="basket-view-container">
+  <mat-card>
+    <mat-card-title style="display: flex">
+      <h2>{{basketItemCount}}</h2>
+      <fa-icon style="margin-left: 2px"
+               [icon]="faShoppingBasket"></fa-icon>
+      <h1 style="margin-left: 10px">Basket</h1>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+<!--      for each basket item display name and price and item option if applicable -->
+
+    </mat-card-content>
+      <mat-card-actions align="end">
+        <!--      total price -->
+        <button mat-button>Checkout</button>
+      </mat-card-actions>
+  </mat-card>
+</div>

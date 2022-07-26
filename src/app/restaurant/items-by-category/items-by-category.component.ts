@@ -2,7 +2,7 @@ import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {filter, map, Observable} from "rxjs";
 import {MenuItem} from "../restaurant-main.model";
 import {RestaurantDataService} from "../restaurant-data.service";
-import {BasketService} from "../../basket/basket.service";
+import {BasketService} from "../../basket/basket-service/basket.service";
 import {
   ItemOptionSelectionDialogComponent
 } from "../item-option-selection-dialog/item-option-selection-dialog.component";
@@ -56,16 +56,24 @@ export class ItemsByCategoryComponent implements OnInit {
     this.basketService.removeFromBasket(itemId);
   }
 
-  openItemOptionsDialog(menuItem: MenuItem): void {
-    this.dialog.open(ItemOptionSelectionDialogComponent,
-      {
-        hasBackdrop: true,
-        width: '500px',
-        height: '600px',
-        data: {
-          menuItem: menuItem
-        }
-      })
+  openItemOptionsDialog(menuItem: MenuItem, $event?: any): void {
+    if (this.shouldOpenDialog($event)) {
+      this.dialog.open(ItemOptionSelectionDialogComponent,
+        {
+          hasBackdrop: true,
+          width: '500px',
+          height: '600px',
+          data: {
+            menuItem: menuItem
+          }
+        });
+    }
+  }
+
+  private shouldOpenDialog($event: any): boolean {
+    return $event ? $event.composedPath()[1]?.className?.includes("mat-grid-tile-content")
+      || $event.composedPath()[2]?.className?.includes("mat-grid-tile-content")
+      || $event.composedPath()[3]?.className?.includes("mat-grid-tile-content") : true;
   }
 
   scrollToView(): void {

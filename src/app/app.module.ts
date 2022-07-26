@@ -20,6 +20,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { ItemOptionSelectionDialogComponent } from './restaurant/item-option-selection-dialog/item-option-selection-dialog.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { ItemsByCategoryComponent } from './restaurant/items-by-category/items-by-category.component';
+import { BasketViewComponent } from './basket/basket-view/basket-view.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ItemsByCategoryComponent } from './restaurant/items-by-category/items-b
     RestaurantCollectComponent,
     RestaurantComponent,
     ItemOptionSelectionDialogComponent,
-    ItemsByCategoryComponent
+    ItemsByCategoryComponent,
+    BasketViewComponent
   ],
   imports: [
     BrowserModule,

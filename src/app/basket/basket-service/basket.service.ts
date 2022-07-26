@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, take} from "rxjs";
-import {BasketItem} from "./basket.model";
-import {MenuItem} from "../restaurant/restaurant-main.model";
+import {BehaviorSubject, take, tap} from "rxjs";
+import {BasketItem} from "../basket.model";
+import {MenuItem} from "../../restaurant/restaurant-main.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +11,23 @@ export class BasketService {
   private basketItemsSubject = new BehaviorSubject<BasketItem[]>([]);
   public basketItems$ = this.basketItemsSubject.asObservable();
 
-  constructor() {
-  }
+  constructor() {}
 
   getBasketItem(itemId: number): BasketItem | undefined {
     return this.basketItemsSubject.getValue().find(basketItem => basketItem.itemId === itemId || undefined);
   }
 
-  addToExistingBasketItem(itemId: number): void {
+  addToExistingBasketItem(itemId: number, itemCount?: number): void {
     const existingBasketItem = this.getBasketItem(itemId)!;
-    existingBasketItem.itemCount++;
+    existingBasketItem.itemCount = itemCount ? itemCount : ++existingBasketItem.itemCount;
     this.basketItemsSubject.next(this.basketItemsSubject.getValue());
   }
 
-  addMenuItemToBasket(menuItem: MenuItem): void {
+  addMenuItemToBasket(menuItem: MenuItem, itemCount?: number): void {
     const newBasketItem = {
       itemId: menuItem.id,
       itemName: menuItem.itemName,
-      itemCount: 1,
+      itemCount: itemCount || 1,
     } as BasketItem;
 
     if (menuItem.itemOptions && menuItem.itemOptions.length > 0) {
