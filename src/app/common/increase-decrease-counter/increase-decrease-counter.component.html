@@ -1,0 +1,16 @@
+<div class="increase-decrease-counter-container">
+  <fa-icon
+    *ngIf="showDecrease"
+    [ngClass]="[decreaseDisabled ? 'fa-disabled' : 'fa-pointer']"
+    (click)="decreaseClicked.emit()"
+    [icon]="faMinus"
+    size="2x"
+  ></fa-icon>
+  <span *ngIf="counterCount !== 0" class="counter">{{counterCount}}</span>
+  <fa-icon
+    size="2x"
+    style="align-self: end;cursor: pointer"
+    [icon]="faAdd"
+    (click)="increaseClicked.emit()"
+  ></fa-icon>
+</div>

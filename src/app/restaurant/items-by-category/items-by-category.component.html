@@ -22,26 +22,12 @@
                 <span *ngIf="menuItem.itemCost"
                       style="font-weight: bold">{{menuItem.itemCost|currency:"EUR":"symbol"}}</span>
                 </div>
-                <div class="add-remove-basket-container" style="z-index: 3">
-                  <fa-icon
-                    *ngIf="!!getBasketItem(menuItem.id) && getBasketItem(menuItem.id)?.itemCount !== 0"
-                    (click)="removeFromBasket(menuItem.id)"
-                    [icon]="faMinus"
-                    size="2x"
-                    style="align-self: end; cursor: pointer"
-                  ></fa-icon>
-                  <span
-                    *ngIf="!!getBasketItem(menuItem.id) && getBasketItem(menuItem.id)?.itemCount !== 0"
-                    style="margin-left: 5px; margin-right: 5px">
-                  {{getBasketItem(menuItem.id)?.itemCount}}
-                </span>
-                  <fa-icon
-                    size="2x"
-                    style="align-self: end;cursor: pointer"
-                    [icon]="faAdd"
-                    (click)="addToBasket(menuItem)"
-                  ></fa-icon>
-                </div>
+                <app-increase-decrease-counter
+                  [showDecrease]="getBasketItem(menuItem.id)?.itemCount! > 0"
+                  [counterCount]="getBasketItem(menuItem.id)?.itemCount"
+                  (decreaseClicked)="removeFromBasket(menuItem.id)"
+                  (increaseClicked)="addToBasket(menuItem)"
+                ></app-increase-decrease-counter>
               </div>
             </mat-card-footer>
           </mat-card>

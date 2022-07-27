@@ -4,5 +4,6 @@ export interface BasketItem {
   itemId: number;
   itemName: string;
   itemCount: number;
+  itemCost?: number;
   itemOption?: ItemOption;
 }

@@ -70,20 +70,19 @@
   <!--  summary footer -->
   <div *ngIf="showSummaryView || !itemOptionsAvailable" style="display: flex; justify-content: space-between">
     <!--    increase reduce basket-->
-    <div>
-      <fa-icon size="2x"
-               [ngClass]="[newBasketItemCount === 1 ? 'fa-disabled' : 'fa-pointer']"
-               [icon]="faMinus"
-               (click)="newBasketItemCount !== 1 ? newBasketItemCount = newBasketItemCount - 1 : 1"></fa-icon>
-      <span style="margin-left: 5px; margin-right: 5px">{{newBasketItemCount}}</span>
-      <fa-icon style="cursor: pointer" size="2x" [icon]="faAdd"
-               (click)="newBasketItemCount = newBasketItemCount + 1 "></fa-icon>
-    </div>
+    <app-increase-decrease-counter
+      [decreaseDisabled]="newBasketItemCount === 1"
+      [counterCount]="newBasketItemCount"
+      (decreaseClicked)="newBasketItemCount !== 1 ? newBasketItemCount = newBasketItemCount - 1 : 1"
+      (increaseClicked)="newBasketItemCount = newBasketItemCount + 1 "
+    ></app-increase-decrease-counter>
 <!--    add to basket -->
-    <button (click)="addItemToBasket()" color="primary" mat-button mat-dialog-close>
-      <div style="display: flex; justify-content: space-between">
+    <button (click)="addItemToBasket()" mat-button mat-dialog-close>
+      <div style="display: flex;">
         <span>Add To Basket</span>
-        <span style="margin-left: 100px">{{getSelectedItemOption()?.itemOptionCost | currency:"EUR":"symbol"}}</span>
+        <span style="margin-left: 20px">{{( !!getSelectedItemOption() ?
+          getSelectedItemOption()!.itemOptionCost * newBasketItemCount:
+          data.menuItem.itemCost! * newBasketItemCount) | currency:"EUR":"symbol"}}</span>
       </div>
     </button>
   </div>

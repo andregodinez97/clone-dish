@@ -12,7 +12,8 @@ import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 })
 export class BasketViewComponent implements OnInit {
   faShoppingBasket = faShoppingBasket;
-  basketItemCount = 0;
+  basketItemsTotalCount = 0;
+  basketItemsTotalCost = 0;
   showBasketView = false;
   basketItems$: Observable<BasketItem[]> | undefined;
 
@@ -22,13 +23,33 @@ export class BasketViewComponent implements OnInit {
     // show basket if more than 1 item in basket and on restaurant page
     this.basketItems$ = this.basketService.basketItems$;
     this.basketItems$.pipe(tap(basketItems => {
-      let newCount = 0;
+      let newTotalCount = 0;
+      let newTotalCost = 0;
       basketItems.forEach(basketItem => {
-        newCount = newCount + basketItem.itemCount;
+        newTotalCount = newTotalCount + basketItem.itemCount;
+
+        if (!!basketItem.itemOption) {
+
+        } else {
+          newTotalCost = newTotalCost + basketItem.itemCount * basketItem.itemCost!;
+        }
       });
 
-      this.basketItemCount = newCount;
+      this.basketItemsTotalCount = newTotalCount;
+      this.basketItemsTotalCost = newTotalCost;
     })).subscribe();
+  }
+
+  getBasketItem(itemId: number): BasketItem | undefined {
+    return this.basketService.getBasketItem(itemId);
+  }
+
+  removeFromBasket(itemId: number): void {
+    this.basketService.removeFromBasket(itemId);
+  }
+
+  addToBasket(itemId: number): void {
+    this.basketService.addToExistingBasketItem(itemId);
   }
 
 }

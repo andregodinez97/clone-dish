@@ -28,6 +28,7 @@ export class BasketService {
       itemId: menuItem.id,
       itemName: menuItem.itemName,
       itemCount: itemCount || 1,
+      itemCost: menuItem.itemCost
     } as BasketItem;
 
     if (menuItem.itemOptions && menuItem.itemOptions.length > 0) {

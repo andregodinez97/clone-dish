@@ -21,6 +21,7 @@ import { ItemOptionSelectionDialogComponent } from './restaurant/item-option-sel
 import {MatRadioModule} from "@angular/material/radio";
 import { ItemsByCategoryComponent } from './restaurant/items-by-category/items-by-category.component';
 import { BasketViewComponent } from './basket/basket-view/basket-view.component';
+import { IncreaseDecreaseCounterComponent } from './common/increase-decrease-counter/increase-decrease-counter.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BasketViewComponent } from './basket/basket-view/basket-view.component'
     RestaurantComponent,
     ItemOptionSelectionDialogComponent,
     ItemsByCategoryComponent,
-    BasketViewComponent
+    BasketViewComponent,
+    IncreaseDecreaseCounterComponent
   ],
   imports: [
     BrowserModule,

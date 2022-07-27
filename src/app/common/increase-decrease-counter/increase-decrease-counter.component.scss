@@ -1,0 +1,18 @@
+.increase-decrease-counter-container {
+  display: flex;
+}
+
+.fa-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fa-pointer {
+  cursor: pointer;
+}
+
+.counter {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+}

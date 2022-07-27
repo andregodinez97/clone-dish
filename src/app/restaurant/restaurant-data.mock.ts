@@ -3,9 +3,9 @@ import {RestaurantMain} from "./restaurant-main.model";
 export const restaurantsDataMock: RestaurantMain[] = [
   {
     id: 9163,
-    name: 'Kawa Asian Street Food',
-    locationSummary: 'Ballinasloe',
-    locationDetail: 'Society Street, Townparks, Ballinasloe',
+    name: 'Asian Street Food',
+    locationSummary: 'Galway',
+    locationDetail: 'Shopstreet, Galway',
     openingHours: new Date("2022-07-08T16:00:00"),
     closingHours: new Date("2022-07-08T23:00:00"),
     minimumOrder: 2,

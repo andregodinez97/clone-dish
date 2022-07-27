@@ -1,19 +1,47 @@
 <div *ngIf="!!basketItems$ && (basketItems$ | async)!.length > 0; let basketItems" class="basket-view-container">
   <mat-card>
     <mat-card-title style="display: flex">
-      <h2>{{basketItemCount}}</h2>
-      <fa-icon style="margin-left: 2px"
+      <h2>{{basketItemsTotalCount}}</h2>
+      <fa-icon style="margin-left: 5px"
                [icon]="faShoppingBasket"></fa-icon>
       <h1 style="margin-left: 10px">Basket</h1>
     </mat-card-title>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-<!--      for each basket item display name and price and item option if applicable -->
-
+    <mat-card-content class="mat-card-content-container">
+      <div class="basket-items-detail-container">
+        <div *ngFor="let basketItem of basketItems$ | async">
+          <mat-divider></mat-divider>
+          <div class="basket-items-name-cost">
+            <h2 class="basket-items-name">
+              {{basketItem.itemName}}
+            </h2>
+            <span *ngIf="!!basketItem.itemCount && (!!basketItem.itemCost || !!basketItem.itemOption?.itemOptionCost)"
+                  style="font-weight: bold; margin-top: 8px">{{
+              (!!basketItem.itemOption ? basketItem.itemOption.itemOptionCost * basketItem.itemCount! :
+                basketItem.itemCost! * basketItem.itemCount!) | currency:"EUR":"symbol"}}</span>
+          </div>
+          <div *ngIf="!!basketItem.itemOption" class="basket-item-option">
+            <span>{{basketItem.itemOption.itemOptionName}}</span>
+          </div>
+          <div class="basket-items-counter">
+            <app-increase-decrease-counter
+              [counterCount]="getBasketItem(basketItem.itemId)?.itemCount"
+              (decreaseClicked)="removeFromBasket(basketItem.itemId)"
+              (increaseClicked)="addToBasket(basketItem.itemId)"
+            ></app-increase-decrease-counter>
+          </div>
+        </div>
+      </div>
     </mat-card-content>
-      <mat-card-actions align="end">
+    <mat-card-actions>
+      <div class="mat-card-actions-container" style="display: flex; justify-content: space-between">
         <!--      total price -->
+        <div style="display:flex"><span style="font-weight: bold;margin-top: 7px; margin-left: 5px">Total</span>
+          <span *ngIf="basketItemsTotalCost > 0"
+                style="font-weight: bold;margin-top: 7px; margin-left: 10px">{{basketItemsTotalCost|currency:"EUR":"symbol"}}</span>
+        </div>
+
         <button mat-button>Checkout</button>
-      </mat-card-actions>
+      </div>
+    </mat-card-actions>
   </mat-card>
 </div>

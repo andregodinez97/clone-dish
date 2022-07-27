@@ -20,6 +20,7 @@ export interface MenuItem {
   itemCategory: string;
 }
 
+//TODO extend item option to multiple options by cateogry
 export interface ItemOption {
   itemOptionId: number;
   itemOptionName: string;
