@@ -1,0 +1,36 @@
+.collection-options-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.collection-options-detail-container {
+  margin-left: 25px;
+}
+
+.collection-options-header {
+  display: flex;
+}
+
+.location-details {
+  display: flex;
+}
+
+.collection-time {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 20px;
+}
+
+.name-order {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 15px
+}
+
+.custom-collection-time {
+  margin-top: 15px;
+}
+
+.basket-items-name-cost {
+  margin-top: 10px;
+}

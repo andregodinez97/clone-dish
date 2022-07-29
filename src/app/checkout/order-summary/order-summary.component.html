@@ -1,0 +1,50 @@
+<div class="order-summary-container">
+  <div class="order-summary-header">
+    <fa-icon style="margin-top: 5px; margin-right: 10px;" [icon]="faShoppingBasket"></fa-icon>
+    <h2>Your order</h2>
+  </div>
+  <div class="order-summary-detail">
+    <div class="basket-items-container">
+      <div class="basket-item" *ngFor="let basketItem of basketItems$ | async">
+        <mat-divider></mat-divider>
+        <div class="basket-items-name-cost">
+          <span class="basket-items-name">
+            {{basketItem.itemName}}
+          </span>
+          <span *ngIf="!!basketItem.itemCount && (!!basketItem.itemCost || !!basketItem.itemOption?.itemOptionCost)"
+                style="font-weight: normal; margin-top: 8px">{{
+            (!!basketItem.itemOption ? basketItem.itemOption.itemOptionCost * basketItem.itemCount! :
+              basketItem.itemCost! * basketItem.itemCount!) | currency:"EUR":"symbol"}}</span>
+        </div>
+        <div class="item-options-counter-container">
+          <div class="basket-item-option">
+            <span>{{basketItem.itemOption?.itemOptionName}}</span>
+          </div>
+          <div class="basket-items-counter">
+            <app-increase-decrease-counter
+              [counterCount]="getBasketItem(basketItem.itemId)?.itemCount"
+              (decreaseClicked)="removeFromBasket(basketItem.itemId)"
+              (increaseClicked)="addToBasket(basketItem.itemId)"
+            ></app-increase-decrease-counter>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="sub-total">
+      <h2>Sub-Total</h2>
+      <span class="sub-total-amount">{{(basketService.subTotal$ | async)| currency:"EUR":"symbol"}}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="processing-fee">
+      <h2>Processing Fee</h2>
+      <span class="processing-fee-amount">{{basketService.processingFee | currency:"EUR":"symbol"}}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="total">
+      <h2>Total</h2>
+      <span class="total-amount">{{(basketService.total$ | async) | currency:"EUR":"symbol"}}</span>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</div>

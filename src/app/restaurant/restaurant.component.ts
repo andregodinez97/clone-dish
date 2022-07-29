@@ -32,7 +32,7 @@ export class RestaurantComponent implements OnInit, AfterViewInit {
       this.restaurantDataService.getRestaurantData(Number(restaurantId));
     });
 
-    this.restaurantMain$ = this.restaurantDataService.restaurantData$;
+    this.restaurantMain$ = this.restaurantDataService.restaurantMainData$;
     this.basketItems$ = this.basketService.basketItems$;
   }
 

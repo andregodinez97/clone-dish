@@ -1,0 +1,31 @@
+<div class="collection-options-container">
+  <div class="collection-options-header">
+    <fa-icon style="margin-top: 5px; margin-right: 10px;" [icon]="faBagShopping"></fa-icon>
+    <h2>Collect At</h2>
+  </div>
+  <div class="collection-options-detail-container">
+    <div class="location-details">
+      <fa-icon [icon]="faLocation"></fa-icon>
+      <span style="font-size: medium; margin-left: 10px">{{restaurantMainData?.locationDetail}}</span>
+    </div>
+    <div class="collection-time">
+      <mat-label>Collection Time</mat-label>
+      <mat-select [formControl]="collectionTime">
+        <mat-option *ngFor="let option of collectionTimeOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+      <mat-form-field *ngIf="customCollectionTimeSelected" class="custom-collection-time" appearance="fill">
+        <mat-label>Collection Time</mat-label>
+        <input [formControl]="customCollectionTime" type="datetime-local" matInput>
+      </mat-form-field>
+    </div>
+    <div class="name-order">
+      <span>Your name on the order (for when you collect)</span>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Full name</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

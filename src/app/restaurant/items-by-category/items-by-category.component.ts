@@ -32,7 +32,7 @@ export class ItemsByCategoryComponent implements OnInit {
   }
 
   getMenuItemsByCategory(category: string): Observable<MenuItem[] | undefined> {
-    return this.restaurantDataService.restaurantData$.pipe(
+    return this.restaurantDataService.restaurantMainData$.pipe(
       filter(restaurant => !!restaurant?.menuItemList),
       map(restaurant => restaurant?.menuItemList.filter(menuItem => menuItem.itemCategory === category)),
     );

@@ -1,0 +1,29 @@
+<div class="payment-methods-container">
+  <div class="payment-methods-header">
+    <fa-icon style="margin-top: 5px; margin-right: 10px;" [icon]="faCreditCard"></fa-icon>
+    <h2>Payment Methods</h2>
+  </div>
+  <div class="payment-methods">
+    <mat-radio-group
+      [formControl]="paymentMethodFormControl"
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group">
+<!--      TODO Add Card system-->
+      <!--      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">-->
+      <!--        {{season}}-->
+      <!--      </mat-radio-button>-->
+      <mat-radio-button value="Add Card">
+        <fa-icon style="margin-top: 5px; margin-right: 10px;" [icon]="faCreditCard"></fa-icon>
+        Add Card
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="pay-button">
+    <button mat-raised-button>
+      <div class="pay-button-details">
+        <span style="font-size: large; font-weight: bolder">{{payButtonTitle}}</span>
+        <span style="font-size: large; font-weight: bolder">{{(basketService.total$ | async) | currency:"EUR":"symbol"}}</span>
+      </div>
+    </button>
+  </div>
+</div>

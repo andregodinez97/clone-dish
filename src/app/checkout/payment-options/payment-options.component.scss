@@ -1,0 +1,25 @@
+.payment-methods-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.payment-methods-header {
+  display: flex;
+}
+
+.payment-methods {
+  display: flex;
+  margin-left: 25px;
+}
+
+.pay-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  button {
+    width: 100%
+  }
+  .pay-button-details {
+    display: flex;
+    justify-content: space-between;
+  }
+}

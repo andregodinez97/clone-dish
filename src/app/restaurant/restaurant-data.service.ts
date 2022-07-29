@@ -8,17 +8,17 @@ import {restaurantsDataMock} from "./restaurant-data.mock";
 })
 export class RestaurantDataService {
 
-  private restaurantDataSubject = new BehaviorSubject<RestaurantMain | undefined>(undefined)
-  public restaurantData$: Observable<RestaurantMain | undefined>;
+  private restaurantMainDataSubject = new BehaviorSubject<RestaurantMain | undefined>(undefined)
+  public restaurantMainData$: Observable<RestaurantMain | undefined>;
 
   constructor() {
-    this.restaurantData$ = this.restaurantDataSubject.asObservable();
+    this.restaurantMainData$ = this.restaurantMainDataSubject.asObservable();
   }
 
   getRestaurantData(restaurantId: number): void {
     // Mocking rest call to get restaurant data by id
     const restaurant = restaurantsDataMock.find(restaurantData => restaurantData.id === restaurantId);
-    this.restaurantDataSubject.next(restaurant);
+    this.restaurantMainDataSubject.next(restaurant);
   }
 
 }

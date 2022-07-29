@@ -1,0 +1,52 @@
+.order-summary-container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 30px;
+}
+
+.order-summary-header {
+  display: flex;
+}
+
+.order-summary-detail{
+  display: flex;
+  flex-flow: column nowrap;
+  margin-left: 25px;
+}
+
+.basket-items-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.basket-items-name-cost {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.basket-items-name {
+  font-weight: normal;
+  font-size: larger;
+}
+
+.item-options-counter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sub-total, .processing-fee, .total {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sub-total-amount, .processing-fee-amount, .total {
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.total {
+  font-size: x-large;
+}

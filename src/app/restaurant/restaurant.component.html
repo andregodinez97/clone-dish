@@ -1,3 +1,4 @@
+<div class="main-container">
 <div class="restaurant-main-container" *ngIf="restaurantMain$ | async; let restaurantMain">
   <div class="restaurant-main-header-container">
     <h1>{{restaurantMain.name}}</h1>
@@ -30,4 +31,9 @@
       ></app-items-by-category>
     </div>
   </div>
+</div>
+<div class="account-basket-view-container">
+  <!--    TODO: Add account component -->
+  <app-basket-view></app-basket-view>
+</div>
 </div>

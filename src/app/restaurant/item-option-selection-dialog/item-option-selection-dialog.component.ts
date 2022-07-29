@@ -62,15 +62,11 @@ export class ItemOptionSelectionDialogComponent implements OnInit {
     if (!!this.basketService.getBasketItem(this.data.menuItem.id)) {
       this.basketService.addToExistingBasketItem(this.data.menuItem.id, this.newBasketItemCount);
     } else {
-      if (this.itemOptionsAvailable) {
-        this.basketService.addMenuItemToBasket(this.data.menuItem, this.newBasketItemCount);
-      } else {
-        this.basketService.addMenuItemToBasket(this.data.menuItem, this.newBasketItemCount);
-      }
+      this.basketService.addMenuItemToBasket(this.data.menuItem, this.newBasketItemCount);
     }
     this.resetToItemSelection();
 
-  //  TODO: Add new basket item with new item option
+    //  TODO: Add new basket item with new item option
   }
 
   private unselectAllItemOptions(): void {

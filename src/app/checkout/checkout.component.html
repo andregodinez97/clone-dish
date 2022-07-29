@@ -1,0 +1,10 @@
+<div class="checkout-container">
+  <h1>Checkout</h1>
+
+  <app-collect-options *ngIf="restaurantMainData$ | async; let restaurantMainData"
+                       [restaurantMainData]="restaurantMainData"
+  ></app-collect-options>
+  <app-order-summary></app-order-summary>
+  <app-notes></app-notes>
+  <app-payment-options></app-payment-options>
+</div>

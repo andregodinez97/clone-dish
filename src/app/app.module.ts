@@ -22,6 +22,15 @@ import {MatRadioModule} from "@angular/material/radio";
 import { ItemsByCategoryComponent } from './restaurant/items-by-category/items-by-category.component';
 import { BasketViewComponent } from './basket/basket-view/basket-view.component';
 import { IncreaseDecreaseCounterComponent } from './common/increase-decrease-counter/increase-decrease-counter.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { CollectOptionsComponent } from './checkout/collect-options/collect-options.component';
+import { OrderSummaryComponent } from './checkout/order-summary/order-summary.component';
+import { PaymentOptionsComponent } from './checkout/payment-options/payment-options.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSelectModule} from "@angular/material/select";
+import {DatePipe} from "@angular/common";
+import { NotesComponent } from './checkout/notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +42,12 @@ import { IncreaseDecreaseCounterComponent } from './common/increase-decrease-cou
     ItemOptionSelectionDialogComponent,
     ItemsByCategoryComponent,
     BasketViewComponent,
-    IncreaseDecreaseCounterComponent
+    IncreaseDecreaseCounterComponent,
+    CheckoutComponent,
+    CollectOptionsComponent,
+    OrderSummaryComponent,
+    PaymentOptionsComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +63,12 @@ import { IncreaseDecreaseCounterComponent } from './common/increase-decrease-cou
     MatGridListModule,
     MatDialogModule,
     MatRadioModule,
-    FormsModule
+    MatInputModule,
+    FormsModule,
+    MatAutocompleteModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
